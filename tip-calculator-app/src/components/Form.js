@@ -1,11 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Form.css";
 function Form() {
   const [formState, setFormState] = useState({
-    price: 0,
-    tipPercent: 0,
-    numberOfPeople: 0,
+    price: "",
+    tipPercent: "",
+    numberOfPeople: 1,
   });
 
   const [totalAmount, setTotalAmount] = useState(0);
@@ -13,32 +13,28 @@ function Form() {
   const [tipPerPerson, setTipPerPerson] = useState(0);
   const [totalPerPerson, setTotalPerPerson] = useState(0);
 
-  useEffect(() => {
-    setTotalAmount((Number(formState.price) + Number(tip)).toFixed(2));
-    setTipPerPerson((tip / formState.numberOfPeople).toFixed(2));
-    setTotalPerPerson((totalAmount / formState.numberOfPeople).toFixed(2));
-  }, [
-    tip,
-    totalAmount,
-    tipPerPerson,
-    totalPerPerson,
-    formState.numberOfPeople,
-    formState.price,
-    formState.tipPercent,
-  ]);
-
   const inputChange = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
   const calculate = (e) => {
     e.preventDefault();
-    setTip(((formState.price * formState.tipPercent) / 100).toFixed(2));
+    const calculatedTip = (
+      (formState.price * formState.tipPercent) /
+      100
+    ).toFixed(2);
+    const calculatedAmount = (
+      Number(formState.price) + Number(calculatedTip)
+    ).toFixed(2);
+    setTip(calculatedTip);
+    setTotalAmount(calculatedAmount);
+    setTipPerPerson((calculatedTip / formState.numberOfPeople).toFixed(2));
+    setTotalPerPerson((calculatedAmount / formState.numberOfPeople).toFixed(2));
   };
   const resetForm = () => {
     setFormState({
-      price: 0.0,
-      tipPercent: 0.0,
-      numberOfPeople: 0,
+      price: "",
+      tipPercent: "",
+      numberOfPeople: 1,
     });
     setTotalAmount(0);
     setTip(0);
@@ -50,7 +46,7 @@ function Form() {
     <div className="form-container">
       <form onSubmit={calculate}>
         <label htmlFor="price">
-          Price $
+          Price $:
           <input
             name="price"
             type="number"
@@ -61,7 +57,7 @@ function Form() {
           />
         </label>
         <label htmlFor="tipPercent">
-          Tip %
+          Tip %:
           <input
             name="tipPercent"
             type="number"
@@ -72,7 +68,7 @@ function Form() {
           />
         </label>
         <label htmlFor="numberOfPeople">
-          Number of People
+          Number of People:
           <input
             name="numberOfPeople"
             type="number"
