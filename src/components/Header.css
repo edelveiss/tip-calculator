@@ -39,10 +39,10 @@
 .total-tip > p, h1{
     text-transform: uppercase;
     text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 .banner-circle{
     display: flex;
