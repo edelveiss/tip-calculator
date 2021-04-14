@@ -1,20 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import "./Form.css";
-function Form() {
-  const [formState, setFormState] = useState({
-    price: "",
-    tipPercent: "",
-    numberOfPeople: 1,
-  });
-
-  const [totalAmount, setTotalAmount] = useState(0);
+function Form({ totalAmount, setTotalAmount, formState, setFormState }) {
   const [tip, setTip] = useState(0);
   const [tipPerPerson, setTipPerPerson] = useState(0);
   const [totalPerPerson, setTotalPerPerson] = useState(0);
 
   const inputChange = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+  const percentInput = (percent) => {
+    setFormState({ ...formState, tipPercent: percent });
+    console.log(formState);
   };
   const calculate = (e) => {
     e.preventDefault();
@@ -45,65 +42,100 @@ function Form() {
   return (
     <div className="form-container">
       <form onSubmit={calculate}>
-        <label htmlFor="price">
-          Price $:
-          <input
-            name="price"
-            type="number"
-            min="0"
-            step=".01"
-            value={formState.price}
-            onChange={inputChange}
-          />
-        </label>
-        <label htmlFor="tipPercent">
-          Tip %:
-          <input
-            name="tipPercent"
-            type="number"
-            min="0"
-            step=".01"
-            value={formState.tipPercent}
-            onChange={inputChange}
-          />
-        </label>
-        <label htmlFor="numberOfPeople">
-          Number of People:
-          <input
-            name="numberOfPeople"
-            type="number"
-            min="0"
-            value={formState.numberOfPeople}
-            onChange={inputChange}
-          />
-        </label>
+        <div className="input-label">
+          <label htmlFor="price">
+            Total cost (excluding tip)
+            <input
+              name="price"
+              type="number"
+              min="0"
+              step=".01"
+              value={formState.price}
+              onChange={inputChange}
+            />
+          </label>
+        </div>
+        <div className="input-label">
+          <label htmlFor="tipPercent">
+            Tip percentage added
+            <div className="percent-btn">
+              <button
+                className={
+                  formState.tipPercent === 0
+                    ? "percent active-percent"
+                    : "percent"
+                }
+                onClick={() => percentInput(0)}
+              >
+                0%
+              </button>
+              <button
+                className={
+                  formState.tipPercent === 10
+                    ? "percent active-percent"
+                    : "percent"
+                }
+                onClick={() => percentInput(10)}
+              >
+                10%
+              </button>
+              <button
+                className={
+                  formState.tipPercent === 15
+                    ? "percent active-percent"
+                    : "percent"
+                }
+                onClick={() => percentInput(15)}
+              >
+                15%
+              </button>
+              <button
+                className={
+                  formState.tipPercent === 20
+                    ? "percent active-percent"
+                    : "percent"
+                }
+                onClick={() => percentInput(20)}
+              >
+                20%
+              </button>
+            </div>
+          </label>
+        </div>
+        <div className="input-label">
+          <label htmlFor="numberOfPeople">
+            Number of People
+            <input
+              name="numberOfPeople"
+              type="number"
+              min="1"
+              value={formState.numberOfPeople}
+              onChange={inputChange}
+            />
+          </label>
+        </div>
         <div className="btn">
-          <button>Calculate</button>
-          <button onClick={resetForm}>Reset</button>
+          <button className="main-btn">Calculate</button>
+          <button className="main-btn" onClick={resetForm}>
+            Reset
+          </button>
         </div>
       </form>
       <div className="result">
-        <h3>Result</h3>
         <div className="span-result">
           <span>Tip:</span>
           <span>${tip}</span>
         </div>
-        <div className="span-result">
-          <span>Total Amount:</span>
-          <span>${totalAmount}</span>
-        </div>
-        {formState.numberOfPeople > 1 && totalAmount > 0 ? (
-          <div className="result-people">
-            <div className="span-result">
-              <span>Tip per person: </span>
-              <span>${tipPerPerson}</span>
-            </div>
-            <div className="span-result">
-              <span>Total Per Person:</span>
-              <span>${totalPerPerson}</span>
-            </div>
+        <div className="result-people">
+          <div className="span-result">
+            <span>Tip per person: </span>
+            <span>${tipPerPerson}</span>
           </div>
-        ) : null}
+          <div className="span-result">
+            <span>Total Per Person:</span>
+            <span>${totalPerPerson}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

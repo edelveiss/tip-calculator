@@ -1,0 +1,70 @@
+.header-top{
+    width: 100%;
+    height: 1.7rem;
+    background-color: #449641;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+.shape {
+    width: 8px;
+    height: 8px;
+    margin: 0.2rem;
+}
+.square{
+    background: white;
+}
+.circle{
+    background: white;
+    border-radius: 50%;
+}
+.triangle{
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid white;
+    margin-right: 0.5rem;
+}
+.total-tip{
+    height: 15em;
+    border-bottom: 1px solid green;
+    background-image: url("../assets/banner2.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.total-tip > p, h1{
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+.banner-circle{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
+}
+.little{
+    width: 5px;
+    height: 5px;
+    margin: 0.1rem;
+    margin-right: 1.3rem;   
+}
+.little:first-child {
+    margin-top: 1rem;
+  }
+.total-tip > p{
+    font-size: 1rem;  
+    top: 40%;
+}
+.total-tip >h1{
+    font-size: 3rem;
+    top: 50%;
+}
