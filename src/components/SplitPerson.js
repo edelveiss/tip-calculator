@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Split.css";
 import EditIcon from "@material-ui/icons/Edit";
+import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -14,6 +15,7 @@ function SplitPerson({ spl }) {
   const { totalAmount, totalTip } = useSelector((state) => state.amount);
   const { price, tipPercent } = useSelector((state) => state.amount);
   const [editToggle, setEditToggle] = useState(false);
+  const [editNameToggle, setEditNameToggle] = useState(false);
   const [splObject, setSplObject] = useState(spl);
   const [splObjectOld] = useState(spl);
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function SplitPerson({ spl }) {
   const onChange = (e) => {
     setSplObject({
       ...splObject,
-      totalPerPersonWithoutTips: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
   const deletePerson = (person) => {
@@ -37,6 +39,24 @@ function SplitPerson({ spl }) {
   };
   const editToggleTotal = () => {
     setEditToggle(!editToggle);
+  };
+  const editToggleName = () => {
+    setEditNameToggle(!editNameToggle);
+  };
+  const formChangeName = (e) => {
+    e.preventDefault();
+    let editPeopleData = [];
+    setEditNameToggle(!editNameToggle);
+    editPeopleData = peopleData.map((el) => {
+      if (el.id === splObject.id) {
+        return {
+          ...el,
+          name: splObject.name,
+        };
+      } else return el;
+    });
+
+    dispatch(setPeopleData(editPeopleData));
   };
   const formSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +92,7 @@ function SplitPerson({ spl }) {
     let editPeopleData = [];
     setEditToggle(!editToggle);
     editPeopleData = peopleData.map((el) => {
-      if (el.name === splObject.name) {
+      if (el.id === splObject.id) {
         return {
           name: splObject.name,
           id: splObject.id,
@@ -89,7 +109,29 @@ function SplitPerson({ spl }) {
   return (
     <div>
       <div className="split-line">
-        <div>{splObject.name}</div>
+        <div className="edit-name">
+          {editNameToggle ? (
+            <form onSubmit={formChangeName} className="split-form-name">
+              <input
+                className="split-input-name"
+                name="name"
+                type="text"
+                defaultValue={splObject.name}
+                onChange={onChange}
+              />
+            </form>
+          ) : (
+            <div>{splObject.name}</div>
+          )}
+          <div
+            className="edit-amount"
+            onClick={() => editToggleName()}
+            style={{ color: "grey", cursor: "pointer" }}
+          >
+            edit
+          </div>
+        </div>
+
         <div className="split-amount">
           <div className="spl">
             {editToggle ? (

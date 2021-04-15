@@ -43,7 +43,19 @@
     justify-content: space-between;
 }
 .split-input{
-    width: 3.3rem;
+    width: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+}
+.edit-name{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.split-input-name{
+    width: 5rem;
     margin-top: 0;
     margin-bottom: 0;
     

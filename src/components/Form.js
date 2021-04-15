@@ -217,7 +217,9 @@ function Form() {
             </div>
           </div>
         )}
+        {/** 
         {equal === 3 && <ListPeople />}
+*/}
       </div>
     </div>
   );
