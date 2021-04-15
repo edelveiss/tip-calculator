@@ -1,7 +1,10 @@
 import React from "react";
 import "./Header.css";
+import { useSelector } from "react-redux";
 
-function Header({ totalAmount, tip }) {
+function Header() {
+  const { totalAmount, tipPercent } = useSelector((state) => state.amount);
+
   return (
     <div className="header">
       <div className="header-top">
@@ -15,7 +18,7 @@ function Header({ totalAmount, tip }) {
           <div className="little circle"></div>
           <div className="little circle"></div>
         </div>
-        <p>Total + {tip}% tip </p>
+        <p>Total + {tipPercent}% tip </p>
         <h1>${totalAmount}</h1>
       </div>
     </div>

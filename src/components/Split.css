@@ -1,0 +1,62 @@
+.split-container{
+    background-color: #EfEDDE;
+    display: flex;
+    flex-direction: column;
+    height: 27rem;
+    overflow: auto;
+}
+.split{
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 2rem;
+}
+.split-line{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-bottom: 1px solid #e2e1d9;
+    display: flex;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #aeaea4;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.split-amount{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.spl{
+    display: flex;
+    align-items: center;
+    margin-top: 0.6rem;
+    margin-bottom: 0.8rem;
+    color: grey;
+    font-size: 1.2rem;
+}
+.edit-amount{
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-between;
+}
+.split-input{
+    width: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+}
+.edit-name{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.split-input-name{
+    width: 5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    
+}
