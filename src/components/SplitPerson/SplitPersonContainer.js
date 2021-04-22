@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import "./Split.css";
-import EditIcon from "@material-ui/icons/Edit";
-import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import "./SplitPerson.css";
+// import EditIcon from "@material-ui/icons/Edit";
+// import SpellcheckIcon from "@material-ui/icons/Spellcheck";
+// import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import RenderSplitPerson from "./RenderSplitPerson";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setPeopleData,
   updateTotalAmount,
   updateTotalTip,
-} from "../state/actions";
+} from "../../state/actions";
 
-function SplitPerson({ spl }) {
+function SplitPersonContainer({ spl }) {
   const peopleData = useSelector((state) => state.peopleData.peopleData);
   const { totalAmount, totalTip } = useSelector((state) => state.amount);
   const { price, tipPercent } = useSelector((state) => state.amount);
@@ -107,65 +108,19 @@ function SplitPerson({ spl }) {
   };
 
   return (
-    <div>
-      <div className="split-line">
-        <div className="edit-name">
-          {editNameToggle ? (
-            <form onSubmit={formChangeName} className="split-form-name">
-              <input
-                className="split-input-name"
-                name="name"
-                type="text"
-                defaultValue={splObject.name}
-                onChange={onChange}
-              />
-            </form>
-          ) : (
-            <div>{splObject.name}</div>
-          )}
-          <div
-            className="edit-amount"
-            onClick={() => editToggleName()}
-            style={{ color: "grey", cursor: "pointer" }}
-          >
-            edit
-          </div>
-        </div>
-
-        <div className="split-amount">
-          <div className="spl">
-            {editToggle ? (
-              <form onSubmit={formSubmit} className="split-form">
-                <input
-                  className="split-input"
-                  name="totalPerPersonWithoutTips"
-                  type="number"
-                  min="0"
-                  step=".01"
-                  defaultValue={splObject.totalPerPersonWithoutTips}
-                  onChange={onChange}
-                />
-              </form>
-            ) : (
-              <span> {splObject.totalPerPersonWithoutTips}</span>
-            )}
-            <span>&nbsp;+&nbsp;</span>
-            <span>{splObject.tipPerPerson}</span> <span>&nbsp;=&nbsp;</span>
-            <span>{splObject.totalPerPerson}</span>
-          </div>
-          <div className="edit-amount">
-            <div onClick={() => editToggleTotal()}>
-              <EditIcon style={{ color: "green", cursor: "pointer" }} />
-            </div>
-            <DeleteForeverIcon
-              style={{ color: "#A3001F", cursor: "pointer" }}
-              onClick={() => deletePerson(splObject)}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <RenderSplitPerson
+      spl={spl}
+      formChangeName={formChangeName}
+      splObject={splObject}
+      onChange={onChange}
+      editToggleTotal={editToggleTotal}
+      deletePerson={deletePerson}
+      formSubmit={formSubmit}
+      editNameToggle={editNameToggle}
+      editToggleName={editToggleName}
+      editToggle={editToggle}
+    />
   );
 }
 
-export default SplitPerson;
+export default SplitPersonContainer;

@@ -1,6 +1,9 @@
 {
   "name": "tip-calculator-app",
   "version": "0.1.0",
+  "description": "Tip Calculator React App  calculates tips for one or more people.",
+  "author": "Tatiana Zhizhimontova <tatyana.zhi@gmail.com> (https://github.com/edelveiss)",
+  "designer": "John Salmon  (https://dribbble.com/shots/6055887-Calculator-Split-The-Bill)",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Split.css";
-import SplitPerson from "./SplitPerson";
+import { SplitPerson } from "./SplitPerson";
 import { useSelector } from "react-redux";
 
 function Split() {

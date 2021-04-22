@@ -3,6 +3,7 @@ import "./Footer.css";
 import { Link, useHistory } from "react-router-dom";
 function Footer() {
   const history = useHistory();
+
   return (
     <div className="footer">
       {history.location.pathname === "/" ? (

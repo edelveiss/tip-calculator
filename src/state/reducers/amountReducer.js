@@ -8,8 +8,8 @@ const initialState = {
   price: "",
   tipPercent: "",
   numberOfPeople: 1,
-  totalAmount: 0,
-  totalTip: 0,
+  totalAmount: (0).toFixed(2),
+  totalTip: (0).toFixed(2),
 };
 
 const amountReducer = (state = initialState, action) => {

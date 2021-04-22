@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import "./App.css";
-import Form from "./components/Form";
+import { Form } from "./components/Form";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Split from "./components/Split";
@@ -16,14 +16,13 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
+          <Header />
           <Switch>
             <Route path="/split">
-              <Header />
               <Split />
               <Footer />
             </Route>
             <Route path="/">
-              <Header />
               <Form />
               <Footer />
             </Route>
