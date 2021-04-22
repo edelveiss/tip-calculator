@@ -54,7 +54,8 @@ function FormContainer() {
   const percentInput = (percent) => {
     setFormState({ ...formState, tipPercent: percent });
   };
-  const calculate = (e) => {
+  const calculateResult = (e) => {
+    console.log("here");
     e.preventDefault();
     calculateTips();
   };
@@ -111,7 +112,7 @@ function FormContainer() {
       inputChange={inputChange}
       percentInput={percentInput}
       resetForm={resetForm}
-      calculate={calculate}
+      calculateResult={calculateResult}
       equal={equal}
     />
   );

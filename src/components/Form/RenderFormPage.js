@@ -1,25 +1,104 @@
 import React from "react";
 import "./Form.css";
+import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
+import {
+  MiddleContainer,
+  FormContainer,
+  LabelElement,
+  InputElement,
+} from "../../styles/style-constans";
+
+const InputLabel = styled("div")(
+  {
+    borderBottom: "1px solid #e2e1d9",
+  },
+  (props) => ({
+    borderBottom: props.borderBottom,
+  })
+);
+const PercentBtn = styled("div")`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  color: black;
+`;
+const Btn = styled("div")`
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+const MainBtn = styled("button")`
+  width: 150px;
+  display: inline-block;
+  padding: 8px 11px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  outline: none;
+  background-color: #16be70;
+  background-image: linear-gradient(to right, #00ab41, #006e86);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-image: none;
+    background-color: #16be70;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+  }
+`;
+const Result = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  color: rgb(112, 110, 110);
+`;
+const SpanResult = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-bottom: 0.3rem;
+`;
+const ResultPeople = styled("div")`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+`;
 
 function RenderFormPage({
   formState,
   inputChange,
   percentInput,
   resetForm,
-  calculate,
+  calculateResult,
   equal,
 }) {
   const { totalTip } = useSelector((state) => state.amount);
   const peopleData = useSelector((state) => state.peopleData.peopleData);
 
   return (
-    <div className="form-container">
-      <form onSubmit={calculate}>
-        <div className="input-label">
-          <label htmlFor="price">
+    <MiddleContainer>
+      <FormContainer onSubmit={calculateResult}>
+        <InputLabel>
+          <LabelElement htmlFor="price">
             Total cost (excluding tip)
-            <input
+            <InputElement
               name="price"
               type="number"
               min="0"
@@ -27,12 +106,12 @@ function RenderFormPage({
               value={formState.price}
               onChange={inputChange}
             />
-          </label>
-        </div>
-        <div className="input-label">
-          <label htmlFor="tipPercent">
+          </LabelElement>
+        </InputLabel>
+        <InputLabel>
+          <LabelElement htmlFor="tipPercent">
             Tip percentage added
-            <div className="percent-btn">
+            <PercentBtn>
               <button
                 className={
                   formState.tipPercent === 0
@@ -73,63 +152,61 @@ function RenderFormPage({
               >
                 20%
               </button>
-            </div>
-          </label>
-        </div>
-        <div className="input-label">
-          <label htmlFor="numberOfPeople">
+            </PercentBtn>
+          </LabelElement>
+        </InputLabel>
+        <InputLabel borderBottom={"none"}>
+          <LabelElement htmlFor="numberOfPeople">
             Number of People
-            <input
+            <InputElement
               name="numberOfPeople"
               type="number"
               min="1"
               value={formState.numberOfPeople}
               onChange={inputChange}
             />
-          </label>
-        </div>
-        <div className="btn">
-          <button className="main-btn">Calculate</button>
-          <button className="main-btn" onClick={resetForm}>
-            Reset
-          </button>
-        </div>
-      </form>
+          </LabelElement>
+        </InputLabel>
+        <Btn>
+          <MainBtn type="submit">Calculate</MainBtn>
+          <MainBtn onClick={resetForm}>Reset</MainBtn>
+        </Btn>
+      </FormContainer>
       {}
-      <div className="result">
-        <div className="span-result">
+      <Result>
+        <SpanResult>
           <span>Total Tip:</span>
           <span>${totalTip}</span>
-        </div>
+        </SpanResult>
         {equal === 0 && (
-          <div className="result-people">
-            <div className="span-result">
+          <ResultPeople>
+            <SpanResult>
               <span>Tip per person: </span>
               <span>$0.00</span>
-            </div>
-            <div className="span-result">
+            </SpanResult>
+            <SpanResult>
               <span>Total Per Person:</span>
               <span>$0.00</span>
-            </div>
-          </div>
+            </SpanResult>
+          </ResultPeople>
         )}
         {equal === 1 && (
-          <div className="result-people">
-            <div className="span-result">
+          <ResultPeople>
+            <SpanResult>
               <span>Tip per person: </span>
               <span>${peopleData[0].tipPerPerson}</span>
-            </div>
-            <div className="span-result">
+            </SpanResult>
+            <SpanResult>
               <span>Total Per Person:</span>
               <span>${peopleData[0].totalPerPerson}</span>
-            </div>
-          </div>
+            </SpanResult>
+          </ResultPeople>
         )}
         {/** 
         {equal === 3 && <ListPeople />}
 */}
-      </div>
-    </div>
+      </Result>
+    </MiddleContainer>
   );
 }
 

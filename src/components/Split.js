@@ -1,7 +1,14 @@
 import React from "react";
-import "./Split.css";
+import styled from "@emotion/styled";
 import { SplitPerson } from "./SplitPerson";
 import { useSelector } from "react-redux";
+import { MiddleContainer } from "../styles/style-constans";
+
+const SplitGrid = styled("div")`
+  margin: 0 auto;
+  width: 80%;
+  margin-top: 2rem;
+`;
 
 function Split() {
   const peopleData = useSelector((state) => state.peopleData.peopleData);
@@ -9,13 +16,13 @@ function Split() {
   console.log("state split", state);
 
   return (
-    <div className="split-container">
-      <div className="split">
+    <MiddleContainer>
+      <SplitGrid>
         {peopleData.map((spl) => (
           <SplitPerson spl={spl} key={spl.id} />
         ))}
-      </div>
-    </div>
+      </SplitGrid>
+    </MiddleContainer>
   );
 }
 
