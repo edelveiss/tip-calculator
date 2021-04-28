@@ -19,6 +19,8 @@ const Wrapper = styled("div")`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  width: 100%;
+  height: 100%;
 `;
 
 const AppFrame = styled("div")`

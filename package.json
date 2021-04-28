@@ -1,6 +1,6 @@
 {
   "name": "tip-calculator-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tip Calculator React App  calculates tips for one or more people.",
   "author": "Tatiana Zhizhimontova <tatyana.zhi@gmail.com> (https://github.com/edelveiss)",
   "designer": "John Salmon  (https://dribbble.com/shots/6055887-Calculator-Split-The-Bill)",
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^7.2.0"
   }
 }

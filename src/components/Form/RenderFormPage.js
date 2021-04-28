@@ -203,11 +203,11 @@ function RenderFormPage({
         {equal === 1 && (
           <ResultPeople>
             <SpanResult>
-              <span>Tip per person: </span>
+              <span>Tip per Person: </span>
               <span>${peopleData[0].tipPerPerson}</span>
             </SpanResult>
             <SpanResult>
-              <span>Total Per Person:</span>
+              <span>Total per Person:</span>
               <span>${peopleData[0].totalPerPerson}</span>
             </SpanResult>
           </ResultPeople>
