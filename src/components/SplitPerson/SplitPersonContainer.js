@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import "./SplitPerson.css";
-// import EditIcon from "@material-ui/icons/Edit";
-// import SpellcheckIcon from "@material-ui/icons/Spellcheck";
-// import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import RenderSplitPerson from "./RenderSplitPerson";
 import { useSelector, useDispatch } from "react-redux";
 import {

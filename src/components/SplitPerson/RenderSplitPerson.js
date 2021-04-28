@@ -1,15 +1,47 @@
 import React from "react";
-import "./SplitPerson.css";
 import styled from "@emotion/styled";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import {
-  MiddleContainer,
-  FormContainer,
-  LabelElement,
-  InputElement,
-} from "../../styles/style-constans";
+import { FormContainer, InputElement } from "../../styles/style-constans";
 
+const SplitLine = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-bottom: 1px solid #e2e1d9;
+  display: flex;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #aeaea4;
+  text-transform: uppercase;
+  font-weight: 700;
+`;
+const EditName = styled("div")`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+`;
+const SplitAmount = styled("div")`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+const EditEAmount = styled("div")`
+  display: flex;
+  align-items: center;
+  width: 20%;
+  justify-content: space-between;
+`;
+const Spl = styled("div")`
+  display: flex;
+  align-items: center;
+  margin-top: 0.6rem;
+  margin-bottom: 0.8rem;
+  color: grey;
+  font-size: 1.2rem;
+`;
 function SplitPersonContainer({
   spl,
   formChangeName,
@@ -23,15 +55,14 @@ function SplitPersonContainer({
   editToggle,
 }) {
   return (
-    <div className="split-line">
-      <div className="edit-name">
+    <SplitLine>
+      <EditName>
         {editNameToggle ? (
           <FormContainer onSubmit={formChangeName}>
             <InputElement
               width={"5rem"}
               marginTop={0}
               marginBottom={0}
-              // className="split-input-name"
               name="name"
               type="text"
               defaultValue={splObject.name}
@@ -41,24 +72,22 @@ function SplitPersonContainer({
         ) : (
           <div>{splObject.name}</div>
         )}
-        <div
-          className="edit-amount"
+        <EditEAmount
           onClick={() => editToggleName()}
           style={{ color: "grey", cursor: "pointer" }}
         >
           edit
-        </div>
-      </div>
+        </EditEAmount>
+      </EditName>
 
-      <div className="split-amount">
-        <div className="spl">
+      <SplitAmount>
+        <Spl>
           {editToggle ? (
             <FormContainer onSubmit={formSubmit}>
               <InputElement
-                width={"3.5rem"}
+                width={"4.5rem"}
                 marginTop={0}
                 marginBottom={0}
-                // className="split-input"
                 name="totalPerPersonWithoutTips"
                 type="number"
                 min="0"
@@ -73,8 +102,8 @@ function SplitPersonContainer({
           <span>&nbsp;+&nbsp;</span>
           <span>{splObject.tipPerPerson}</span> <span>&nbsp;=&nbsp;</span>
           <span>{splObject.totalPerPerson}</span>
-        </div>
-        <div className="edit-amount">
+        </Spl>
+        <EditEAmount>
           <div onClick={() => editToggleTotal()}>
             <EditIcon style={{ color: "green", cursor: "pointer" }} />
           </div>
@@ -82,9 +111,9 @@ function SplitPersonContainer({
             style={{ color: "#A3001F", cursor: "pointer" }}
             onClick={() => deletePerson(splObject)}
           />
-        </div>
-      </div>
-    </div>
+        </EditEAmount>
+      </SplitAmount>
+    </SplitLine>
   );
 }
 

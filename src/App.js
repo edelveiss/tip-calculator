@@ -3,7 +3,7 @@ import reducer from "./state/reducers";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Form } from "./components/Form";
 import Header from "./components/Header";
@@ -34,6 +34,9 @@ const AppFrame = styled("div")`
 `;
 
 function App() {
+  const [footerToggle, setFooterToggle] = useState(false);
+  // const [menuToggle, setMenuToggle] = useState(false);
+
   return (
     <Provider store={store}>
       <Router>
@@ -43,13 +46,15 @@ function App() {
             <Switch>
               <Route path="/split">
                 <Split />
-                <Footer />
               </Route>
               <Route path="/">
                 <Form />
-                <Footer />
               </Route>
             </Switch>
+            <Footer
+              footerToggle={footerToggle}
+              setFooterToggle={setFooterToggle}
+            />
           </AppFrame>
         </Wrapper>
       </Router>

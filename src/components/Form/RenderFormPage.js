@@ -1,5 +1,4 @@
 import React from "react";
-import "./Form.css";
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
 import {
@@ -80,6 +79,33 @@ const ResultPeople = styled("div")`
   font-size: 1.2rem;
   margin-bottom: 1rem;
 `;
+const PercentButton = styled("button")`
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 50px;
+  background-color: white;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: 3px solid #87eb5d;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all 0.3s ease-in-out;
+
+  ${(props) =>
+    props.type === "active"
+      ? `
+  background-color: #6DBC3A;
+  color: white;
+  font-weight: 800;
+  border: none;
+  outline: none;
+  `
+      : null}
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 function RenderFormPage({
   formState,
@@ -112,46 +138,30 @@ function RenderFormPage({
           <LabelElement htmlFor="tipPercent">
             Tip percentage added
             <PercentBtn>
-              <button
-                className={
-                  formState.tipPercent === 0
-                    ? "percent grow active-percent"
-                    : "percent grow"
-                }
+              <PercentButton
+                type={formState.tipPercent === 0 ? "active" : ""}
                 onClick={() => percentInput(0)}
               >
                 0%
-              </button>
-              <button
-                className={
-                  formState.tipPercent === 10
-                    ? "percent grow active-percent"
-                    : "percent grow"
-                }
+              </PercentButton>
+              <PercentButton
+                type={formState.tipPercent === 10 ? "active" : ""}
                 onClick={() => percentInput(10)}
               >
                 10%
-              </button>
-              <button
-                className={
-                  formState.tipPercent === 15
-                    ? "percent grow active-percent"
-                    : "percent grow"
-                }
+              </PercentButton>
+              <PercentButton
+                type={formState.tipPercent === 15 ? "active" : ""}
                 onClick={() => percentInput(15)}
               >
                 15%
-              </button>
-              <button
-                className={
-                  formState.tipPercent === 20
-                    ? "percent grow active-percent"
-                    : "percent grow"
-                }
+              </PercentButton>
+              <PercentButton
+                type={formState.tipPercent === 20 ? "active" : ""}
                 onClick={() => percentInput(20)}
               >
                 20%
-              </button>
+              </PercentButton>
             </PercentBtn>
           </LabelElement>
         </InputLabel>
@@ -202,9 +212,6 @@ function RenderFormPage({
             </SpanResult>
           </ResultPeople>
         )}
-        {/** 
-        {equal === 3 && <ListPeople />}
-*/}
       </Result>
     </MiddleContainer>
   );

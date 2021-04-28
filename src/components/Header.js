@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import bannerImg from "../assets/banner2.jpeg";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import GitHubIcon from "@material-ui/icons/GitHub";
 const HeaderTop = styled("div")`
   width: 100%;
   height: 1.7rem;
@@ -78,10 +80,24 @@ const LittleCircle = styled("div")(
     marginTop: props.top,
   })
 );
+const MenuDiv = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aligne-items: center;
+`;
+const MenuH1 = styled("div")({
+  textAlign: "center",
+  color: "white",
+  fontSize: "1.2rem",
+});
+const MenuSpan = styled("span")`
+  color: white;
+`;
 
 function Header() {
   const { totalAmount, tipPercent } = useSelector((state) => state.amount);
-
+  const [menuToggle, setMenuToggle] = useState(true);
   return (
     <div className="header">
       <HeaderTop>
@@ -90,17 +106,79 @@ function Header() {
 
         <Triangle></Triangle>
       </HeaderTop>
-      <TotalTip img={bannerImg}>
-        <BannerCircle>
-          <LittleCircle top={"1rem"}></LittleCircle>
-          <LittleCircle></LittleCircle>
-          <LittleCircle></LittleCircle>
-        </BannerCircle>
-        <TotalTipPH1>Total + {tipPercent}% tip </TotalTipPH1>
-        <TotalTipPH1 size={"3rem"} top={"60%"}>
-          ${totalAmount}
-        </TotalTipPH1>
-      </TotalTip>
+      {menuToggle ? (
+        <TotalTip img={bannerImg}>
+          <BannerCircle onClick={() => setMenuToggle(!menuToggle)}>
+            <LittleCircle top={"1rem"}></LittleCircle>
+            <LittleCircle></LittleCircle>
+            <LittleCircle></LittleCircle>
+          </BannerCircle>
+
+          <TotalTipPH1>Total + {tipPercent}% tip </TotalTipPH1>
+          <TotalTipPH1 size={"3rem"} top={"60%"}>
+            ${totalAmount}
+          </TotalTipPH1>
+        </TotalTip>
+      ) : (
+        <TotalTip img={bannerImg}>
+          <BannerCircle onClick={() => setMenuToggle(!menuToggle)}>
+            <LittleCircle top={"1rem"}></LittleCircle>
+            <LittleCircle></LittleCircle>
+            <LittleCircle></LittleCircle>
+          </BannerCircle>
+          <MenuDiv>
+            <MenuH1 size={"1rem"} top={"35%"}>
+              <span> Author:</span> <span>Tatiana Zhizhimontova</span>
+            </MenuH1>
+            <MenuH1>
+              {" "}
+              <a
+                href="https://www.linkedin.com/in/tatiana-zhizhimontova/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <LinkedInIcon
+                  style={{
+                    color: "white",
+                    margin: "1rem",
+                    fontSize: "2rem",
+                  }}
+                />
+              </a>
+              <a
+                href="https://github.com/edelveiss"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <GitHubIcon
+                  style={{
+                    color: "white",
+                    margin: "1rem",
+                    fontSize: "2rem",
+                  }}
+                />
+              </a>
+            </MenuH1>
+            <MenuH1>
+              <a
+                href="https://dribbble.com/shots/6055887-Calculator-Split-The-Bill"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <MenuSpan> Designer:</MenuSpan>
+                <MenuSpan>John Salmon</MenuSpan>
+              </a>
+            </MenuH1>
+            <MenuH1>
+              <MenuSpan> Project Manager:</MenuSpan>{" "}
+              <MenuSpan>Eugene Hauptmann</MenuSpan>
+            </MenuH1>
+            <MenuH1>
+              <p>2021</p>
+            </MenuH1>
+          </MenuDiv>
+        </TotalTip>
+      )}
     </div>
   );
 }
