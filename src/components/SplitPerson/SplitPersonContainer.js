@@ -55,6 +55,7 @@ function SplitPersonContainer({ spl }) {
 
     dispatch(setPeopleData(editPeopleData));
   };
+
   const formSubmit = (e) => {
     e.preventDefault();
     const tipPP = (

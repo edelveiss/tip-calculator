@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import RenderFormPage from "./RenderFormPage";
 import {
+  calculateTotalTip,
+  calculateTotalAmount,
+  calculateAmountWithoutTipsPerPerson,
+  calculateTipPerPerson,
+  calculateTotalAmountPerPerson,
+} from "../../utils";
+import {
   setAmount,
   setPeopleData,
   updateTotalAmount,
   updateTotalTip,
 } from "../../state/actions";
+
 function FormContainer() {
   const { price, tipPercent, numberOfPeople } = useSelector(
     (state) => state.amount
@@ -56,43 +64,35 @@ function FormContainer() {
     e.preventDefault();
     calculateTips();
   };
-  //Calculates total tips
-  const calculateTotalTip = () => {
-    return ((price * tipPercent) / 100).toFixed(2);
-  };
-  //Calculates total amount
-  const calculateTotalAmount = () => {
-    return Number(price) + Number(calculateTotalTip());
-  };
-  //Calculates amount without tips
-  const calculateAmountWithoutTipsPerPerson = () => {
-    return (calculateTotalAmount() - calculateTotalTip()) / numberOfPeople;
-  };
-  //Calculates tip per person
-  const calculateTipPerPerson = () => {
-    return calculateTotalTip() / numberOfPeople;
-  };
-  //Calculates total amount per person
-  const calculateTotalAmountPerPerson = () => {
-    return calculateTotalAmount() / numberOfPeople;
-  };
 
   const calculateTips = () => {
-    dispatch(updateTotalTip(calculateTotalTip()));
-    dispatch(updateTotalAmount(calculateTotalAmount()));
-    setTipPerPerson(calculateTipPerPerson());
-    setTotalPerPerson(calculateTotalAmountPerPerson());
+    dispatch(updateTotalTip(calculateTotalTip(price, tipPercent)));
+    dispatch(updateTotalAmount(calculateTotalAmount(price, tipPercent)));
+    setTipPerPerson(calculateTipPerPerson(price, tipPercent, numberOfPeople));
+    setTotalPerPerson(
+      calculateTotalAmountPerPerson(price, tipPercent, numberOfPeople)
+    );
 
     let tipArray = [];
     for (let i = 0; i < numberOfPeople; i++) {
       tipArray.push({
         id: i,
-        tipPerPerson: calculateTipPerPerson().toFixed(2),
-        totalPerPerson: calculateTotalAmountPerPerson().toFixed(2),
+        tipPerPerson: calculateTipPerPerson(
+          price,
+          tipPercent,
+          numberOfPeople
+        ).toFixed(2),
+        totalPerPerson: calculateTotalAmountPerPerson(
+          price,
+          tipPercent,
+          numberOfPeople
+        ).toFixed(2),
         name: `Person ${String(i + 1)}`,
-        totalPerPersonWithoutTips: calculateAmountWithoutTipsPerPerson().toFixed(
-          2
-        ),
+        totalPerPersonWithoutTips: calculateAmountWithoutTipsPerPerson(
+          price,
+          tipPercent,
+          numberOfPeople
+        ).toFixed(2),
       });
     }
     dispatch(setPeopleData(tipArray));
